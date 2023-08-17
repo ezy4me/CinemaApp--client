@@ -1,14 +1,19 @@
 <template>
-    <TheHeader/>
+  <TheHeader />
+  <main>
+    body
+  </main>
+  <TheFooter />
 </template>
 <script lang="ts">
-import TheHeader from './components/TheHeader.vue';
+import { defineComponent } from "vue";
+import TheHeader from "./components/Layouts/TheHeader.vue";
+import TheFooter from "./components/Layouts/TheFooter.vue";
 
-export default {
-    setup() {
-        return {};
-    },
-    components: { TheHeader }
-};
+export default defineComponent({
+  setup() {
+    return {};
+  },
+  components: { TheHeader, TheFooter },
+});
 </script>
-<style scoped lang="scss"></style>
