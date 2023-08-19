@@ -16,7 +16,7 @@
         </ul>
       </nav>
     </div>
-    <VSlider :data="headerImages"/>
+    <VSlider :data="headerImages" />
   </header>
 </template>
 <script lang="ts">

@@ -12,12 +12,20 @@
           }"></div>
       </div>
     </div>
-    <button class="prev-btn" @click="prevSlide">Previous</button>
-    <button class="next-btn" @click="nextSlide">Next</button>
+    <button class="prev-btn" @click="prevSlide"></button>
+    <button class="next-btn" @click="nextSlide"></button>
+    <div class="pagination">
+      <div
+        @click="choosePage(index)"
+        v-for="index in loopedData"
+        :key="index"
+        class="page"
+        :style="{ opacity: index.id === activeIndex ? 1 : 0.5 }"></div>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" scoped>
 import { ref, defineComponent, toRefs } from "vue";
 
 export default defineComponent({
@@ -37,6 +45,9 @@ export default defineComponent({
     }
 
     const prevSlide = () => {
+      if (activeIndex.value == 0) {
+        activeIndex.value = loopedData.length;
+      }
       activeIndex.value = Math.max(activeIndex.value - 1, 0);
     };
 
@@ -46,6 +57,10 @@ export default defineComponent({
 
     const loopedData = [...data.value];
 
+    const choosePage = (index: any) => {
+      return (activeIndex.value = index.id);
+    };
+
     return {
       prevSlide,
       nextSlide,
@@ -53,12 +68,13 @@ export default defineComponent({
       getImageUrl,
       activeIndex,
       loopedData,
+      choosePage,
     };
   },
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 .slider {
   position: relative;
   overflow: hidden;
@@ -74,19 +90,29 @@ export default defineComponent({
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  padding: 0.5rem 1rem;
-  background-color: #333;
+  padding: 1.5rem;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 50%;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: transparent;
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: invert(100%);
 }
 
 .prev-btn {
-  left: 0;
+  left: -2rem;
+  background-image: url("../../../public/images/left-arrow.png");
 }
 
 .next-btn {
-  right: 0;
+  right: -2rem;
+  background-image: url("../../../public/images/right-arrow.png");
 }
 
 .slide {
@@ -100,5 +126,36 @@ export default defineComponent({
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.slider:hover .prev-btn {
+  left: 2rem;
+  opacity: 1;
+}
+
+.slider:hover .next-btn {
+  right: 2rem;
+  opacity: 1;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+}
+
+.page {
+  width: 1rem;
+  height: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 </style>
