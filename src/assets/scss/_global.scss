@@ -29,6 +29,8 @@ body {
 
 main {
     min-height: 100vh;
+    // padding: 4rem 0;
+    margin: 6.3rem 0;
 }
 
 .container {
@@ -49,7 +51,7 @@ ul {
 }
 
 .title {
-    @include font-size(32, 6, 6);
+    @include font-size(32, normal, 6);
     text-transform: uppercase;
     margin: 4rem 0;
 }

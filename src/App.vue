@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <main style="margin-top: 6.3rem;">
+  <main>
     <router-view />
   </main>
   <TheFooter />
