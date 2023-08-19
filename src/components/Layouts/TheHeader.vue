@@ -16,34 +16,13 @@
         </ul>
       </nav>
     </div>
-    <VSlider :data="headerImages" />
-  </header>
+</header>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import VSlider from "../Common/VSlider.vue";
+import { defineComponent, } from "vue";
 export default defineComponent({
   setup() {
-    const headerImages = reactive([
-      {
-        id: 0,
-        title: "slide 1",
-        source: "../../../public/images/header-slide-1.jpg",
-      },
-      {
-        id: 1,
-        title: "slide 2",
-        source: "../../../public/images/header-slide-2.jpg",
-      },
-      {
-        id: 2,
-        title: "slide 3",
-        source: "../../../public/images/header-slide-3.jpg",
-      },
-    ]);
-
-    return { headerImages };
+   
   },
-  components: { VSlider },
 });
 </script>

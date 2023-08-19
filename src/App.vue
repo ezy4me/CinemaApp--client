@@ -1,7 +1,7 @@
 <template>
   <TheHeader />
-  <main>
-    body
+  <main style="margin-top: 6.3rem;">
+    <router-view />
   </main>
   <TheFooter />
 </template>

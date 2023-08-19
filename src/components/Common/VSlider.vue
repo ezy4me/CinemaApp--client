@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" scoped>
-import { ref, defineComponent, toRefs } from "vue";
+import { ref, defineComponent, toRefs, onMounted, onBeforeUnmount } from "vue";
 
 export default defineComponent({
   props: {
@@ -39,6 +39,7 @@ export default defineComponent({
     const { data } = toRefs(props);
     const position = ref(0);
     const activeIndex = ref(0);
+    let interval: any;
 
     function getImageUrl(source: string) {
       return new URL(source, import.meta.url).href;
@@ -60,6 +61,14 @@ export default defineComponent({
     const choosePage = (index: any) => {
       return (activeIndex.value = index.id);
     };
+
+    onMounted(() => {
+      interval = setInterval(nextSlide, 3000);
+    });
+
+    onBeforeUnmount(() => {
+      clearInterval(interval);
+    });
 
     return {
       prevSlide,
@@ -96,7 +105,7 @@ export default defineComponent({
   cursor: pointer;
   border-radius: 50%;
   opacity: 0;
-  transition: 0.3s ease;
+  transition: 0.3s ease-in-out;
   background-color: transparent;
   background-blend-mode: multiply;
   background-size: cover;
@@ -117,12 +126,11 @@ export default defineComponent({
 
 .slide {
   width: 100%;
-  transition: background-image 1s ease-in-out;
 }
 
 .slide-inner {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
