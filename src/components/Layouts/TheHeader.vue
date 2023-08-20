@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__top container">
+    <div class="header__top">
       <div class="header__actions">
         <div class="logo">CINEMA</div>
         <input class="search-bar" placeholder="Поиск..." />
